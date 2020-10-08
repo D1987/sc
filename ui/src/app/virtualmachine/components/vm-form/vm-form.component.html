@@ -1,0 +1,67 @@
+<form [formGroup]="vmForm" novalidate>
+    <div formGroupName="host">
+        <mat-form-field appearance="outline">
+            <mat-label>Host</mat-label>
+            <mat-select formControlName="id">
+                <mat-option>None</mat-option>     
+                <mat-option *ngFor="let host of hosts" [value]="host.id">{{host.name}}</mat-option>
+                <!-- <mat-error *ngIf="vmForm.controls['id'].errors?.required">This field is required</mat-error>                  -->
+            </mat-select>            
+        </mat-form-field>
+    </div>
+    <p>
+        <mat-form-field appearance="outline" >
+            <mat-label>Name</mat-label>
+            <input matInput [formControl]="vmForm.controls['name']"/>
+            <mat-error *ngIf="vmForm.controls['name'].errors?.required">Name is required</mat-error>
+        </mat-form-field>
+    </p>  
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>IP</mat-label>
+            <input matInput [formControl]="vmForm.controls['ip']" placeholder="Without http://; https://"/>
+            <mat-error *ngIf="vmForm.controls['ip'].errors?.pattern">IP invalid</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>OS</mat-label>
+            <input matInput [formControl]="vmForm.controls['os']"/>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Login</mat-label>
+            <input matInput [formControl]="vmForm.controls['login']"/>
+            <mat-error *ngIf="vmForm.controls['login'].errors?.required">Login is required</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input [type]="hide ? 'password' : 'text'" matInput [formControl]="vmForm.controls['password']"/>
+            <mat-icon matSuffix class="placeholder eye-pointer" (click)="hidePassword()"> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error *ngIf="vmForm.controls['password'].errors?.required">Password is required</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput placeholder="Type smth." [formControl]="vmForm.controls['description']"></textarea>
+        </mat-form-field>
+    </p>
+    <p>
+        <span>Critical: </span>
+        <mat-radio-group aria-label="Select an option" [formControl]="vmForm.controls['critical']">
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
+        </mat-radio-group>        
+    </p>
+    <p>
+        <span>Enabled: </span>
+        <mat-radio-group aria-label="Select an option" [formControl]="vmForm.controls['enabled']">
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
+        </mat-radio-group>        
+    </p>
+</form>

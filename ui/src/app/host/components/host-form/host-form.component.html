@@ -1,0 +1,55 @@
+<form [formGroup]="hostForm" novalidate >    
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput [formControl]="hostForm.controls['name']"/>
+            <mat-error *ngIf="hostForm.controls['name'].errors?.required">Host is required</mat-error>            
+        </mat-form-field>
+    </p>
+    <p>        
+        <mat-form-field appearance="outline">
+            <mat-label>Location</mat-label>
+            <mat-select [formControl]="hostForm.controls['location']" name="location">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let location of keys(locations)" [value]="location">
+                {{locations[location]}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="hostForm.controls['location'].errors?.required">Location is required</mat-error>
+        </mat-form-field>        
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>IP</mat-label>
+            <input matInput [formControl]="hostForm.controls['ip']" placeholder="Without http://; https://"/>
+            <mat-error *ngIf="hostForm.controls['ip'].errors?.pattern">IP invalid</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>OS</mat-label>
+            <input matInput [formControl]="hostForm.controls['os']"/>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Login</mat-label>
+            <input matInput [formControl]="hostForm.controls['login']"/>
+            <mat-error *ngIf="hostForm.controls['login'].errors?.required">Login is required</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input [type]="hide ? 'password' : 'text'" matInput [formControl]="hostForm.controls['password']">                    
+            <mat-icon matSuffix class="placeholder eye-pointer" (click)="hidePassword()"> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error *ngIf="hostForm.controls['password'].errors?.required">Password is required</mat-error>            
+        </mat-form-field>        
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput placeholder="Type smth." [formControl]="hostForm.controls['description']"></textarea>
+        </mat-form-field>
+    </p>
+</form>

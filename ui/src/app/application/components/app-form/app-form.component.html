@@ -1,0 +1,82 @@
+<form [formGroup]="appForm" novalidate >
+    <div formGroupName="vm">
+        <mat-form-field appearance="outline">
+            <mat-label>Virtual Machine</mat-label>
+            <mat-select formControlName="id">
+                <mat-option>None</mat-option>     
+                <mat-option *ngFor="let vm of vms" [value]="vm.id">{{vm.name}}</mat-option>        
+            </mat-select>            
+        </mat-form-field>
+    </div>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput [formControl]="appForm.controls['name']"/>
+            <mat-error *ngIf="appForm.controls['name'].errors?.required">Name is required</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Project</mat-label>
+            <input matInput [formControl]="appForm.controls['project']"/>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Type</mat-label>
+            <mat-select [formControl]="appForm.controls['type']" name="type">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let type of keys(appTypes)" [value]="type">
+                {{appTypes[type]}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>IP</mat-label>
+            <input matInput [formControl]="appForm.controls['ip']" placeholder="Without http://; https://"/>
+            <mat-error *ngIf="appForm.controls['ip'].errors?.pattern">IP invalid</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Domain</mat-label>
+            <input matInput [formControl]="appForm.controls['domain']" placeholder="Without http://; https://"/>            
+            <mat-error *ngIf="appForm.controls['domain'].errors?.pattern">Domain is invalid</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Login</mat-label>
+            <input matInput [formControl]="appForm.controls['login']"/>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input [type]="hide ? 'password' : 'text'" matInput [formControl]="appForm.controls['password']"/>
+            <mat-icon matSuffix class="placeholder eye-pointer" (click)="hidePassword()"> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput placeholder="Type smth." [formControl]="appForm.controls['description']"></textarea>
+        </mat-form-field>
+    </p>
+    <p>
+        <span>Critical: </span>
+        <mat-radio-group aria-label="Select an option" [formControl]="appForm.controls['critical']">
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
+        </mat-radio-group>        
+    </p>
+    <p>
+        <span>Enabled: </span>
+        <mat-radio-group aria-label="Select an option" [formControl]="appForm.controls['enabled']">
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
+        </mat-radio-group>        
+    </p>
+</form>

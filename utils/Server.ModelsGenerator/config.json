@@ -1,0 +1,7 @@
+﻿{
+  "Source": "../../src/Server.Dtos/bin/Debug/netcoreapp3.1/",
+  "TsDestination": "../../ui/src/app/models",
+  "Namespace": "Server.Dtos",
+  "Files": [ "*.Dtos.dll" ],
+  "Models": "../../src/Server.Dtos"
+}

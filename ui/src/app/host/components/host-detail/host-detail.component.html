@@ -1,0 +1,49 @@
+<div *ngIf="loaded" >
+    <h2>{{host.name}}
+       <div class="close-icon">
+            <mat-icon style="cursor: pointer;" routerLink="/hosts" aria-label="Cancel">cancel</mat-icon>
+        </div>
+    </h2>    
+    <mat-card>
+        <mat-card-content>            
+            <mat-card-title>IP - <span>{{host.ip}}</span></mat-card-title>
+            <mat-card-title>OS - <span>{{host.os}}</span></mat-card-title>
+            <mat-card-title>Login - <span>{{host.login}}</span></mat-card-title>
+            <mat-card-title>Password
+                <span *ngIf="hide" > - {{host.password}}</span>
+                <mat-icon style="vertical-align: bottom;" class="placeholder eye-pointer" (click)="hidePassword()"> {{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            </mat-card-title>
+            <mat-card-title>Location - <span>{{host.location}}</span></mat-card-title>
+            <mat-card-title *ngIf="host?.description;">Description - <span>{{host.description}}</span></mat-card-title>            
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<div>
+    <h2>Virtual Machines</h2>
+    <mat-card>
+        <mat-card-content>
+            <div class="form">
+                <mat-form-field appearance="outline">
+                    <mat-label>Search Virtual Machines</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Type smth." [(ngModel)]="searchField" #input>
+                    <mat-icon matPrefix>search</mat-icon>
+                    <mat-icon matSuffix *ngIf="searchField" (click)="clearFilters()" class="cursor-pointer">clear</mat-icon>
+                </mat-form-field>
+            </div>
+            <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                    <mat-cell *matCellDef="let vm">
+                        <a [routerLink]="['/vms/vmdetail', vm?.id]">{{vm?.name}}</a>            
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+            <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]"></mat-paginator>
+        </mat-card-content>
+    </mat-card>
+</div>

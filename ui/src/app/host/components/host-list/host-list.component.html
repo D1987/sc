@@ -1,0 +1,49 @@
+<div class="mat-cell">
+  <h2>HOSTS</h2>  
+  <mat-card>
+    <mat-card-content>
+      <div class="form">
+          <mat-form-field appearance="outline">
+              <mat-label>Search Host</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Type smth." [(ngModel)]="searchField" #input>
+              <mat-icon matPrefix>search</mat-icon>
+              <mat-icon matSuffix *ngIf="searchField" (click)="clearFilters()" class="cursor-pointer">clear</mat-icon>
+          </mat-form-field>
+      </div>  
+      <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+          <mat-cell *matCellDef="let host">
+              <a [routerLink]="['hostdetail', host.id]">{{host?.name}}</a>            
+          </mat-cell>
+        </ng-container>
+        <!-- Location Column -->
+        <ng-container matColumnDef="location">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Location</mat-header-cell>
+          <mat-cell *matCellDef="let host">{{host?.location}}</mat-cell>
+        </ng-container>       
+        <!-- actions -->
+        <ng-container matColumnDef="actions" >
+          <mat-header-cell *matHeaderCellDef class="align-right">
+            <button mat-icon-button color="primary" [routerLink]="['host', 0]">
+              <mat-icon aria-label="Add">add</mat-icon>
+            </button>
+          </mat-header-cell>    
+          <mat-cell *matCellDef="let host; let i=index;" class="align-right">
+            <button mat-icon-button color="primary" [routerLink]="['host', host.id]">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>    
+            <button mat-icon-button color="primary"(click)="openDialog(host.id, host.name)">
+              <mat-icon aria-label="Delete">delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>        
+      </mat-table>  
+      <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]"></mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>
+  

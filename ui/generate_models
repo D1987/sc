@@ -1,0 +1,5 @@
+#!/bin/sh
+cd ../src/Server.Dtos/
+dotnet build
+cd ../../utils/Server.ModelsGenerator
+dotnet run ts

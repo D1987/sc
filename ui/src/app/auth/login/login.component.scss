@@ -1,0 +1,22 @@
+.login-box{
+  margin: auto;
+  margin-top: 12%;
+}
+
+div.image {
+  content:url(../../../assets/afrans.png);
+}
+
+.image-style {
+  margin:0 auto;
+}
+
+mat-card {
+  max-width: 500px;
+  margin: 2em auto;
+  text-align: center;
+}
+
+mat-form-field {
+  display: block;
+}

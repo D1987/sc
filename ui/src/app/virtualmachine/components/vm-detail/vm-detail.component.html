@@ -1,0 +1,59 @@
+<div *ngIf="loaded" >
+    <h2>{{vm.name}}
+        <div class="right-position">
+            <mat-icon style="cursor: pointer;" routerLink="/vms" aria-label="Cancel">cancel</mat-icon>
+        </div>
+    </h2>   
+    <mat-card>
+        <mat-card-content>          
+            <mat-card-title>IP -
+                <a [attr.href]="'//' + vm?.ip" target="_blank" >{{vm?.ip}}</a>                
+            </mat-card-title>
+            <mat-card-title *ngIf="vm?.os">OS - <span>{{vm.os}}</span></mat-card-title>
+            <mat-card-title *ngIf="vm?.critical;">Critical - <span>Yes</span></mat-card-title>
+            <mat-card-title>Login - <span>{{vm.login}}</span></mat-card-title>
+            <mat-card-title>Password
+                <span *ngIf="hide" > - {{vm.password}}</span>
+                <mat-icon style="vertical-align: bottom;" class="placeholder eye-pointer" (click)="hidePassword()"> {{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            </mat-card-title>
+            <mat-card-title *ngIf="!vm?.enabled;">Enabled - <span>No</span></mat-card-title>
+            <mat-card-title>HOST - 
+                <a [routerLink]="['/hosts/hostdetail', vm.host.id]" class="nav-link">{{vm.host.name}}</a>
+            </mat-card-title>
+            <mat-card-title *ngIf="vm?.description;">Description - <span>{{vm.description}}</span></mat-card-title>            
+        </mat-card-content>
+    </mat-card>    
+</div>
+
+<div>
+    <h2>Applications</h2>
+    <mat-card>
+        <mat-card-content>
+            <div class="form">
+                <mat-form-field appearance="outline">
+                    <mat-label>Search Virtual Machines</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Type smth." [(ngModel)]="searchField" #input>
+                    <mat-icon matPrefix>search</mat-icon>
+                    <mat-icon matSuffix *ngIf="searchField" (click)="clearFilters()" class="cursor-pointer">clear</mat-icon>
+                </mat-form-field>
+            </div>
+            <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                    <mat-cell *matCellDef="let a">
+                        <a [routerLink]="['/apps/appdetail', a?.id]">{{a?.name}}</a>            
+                    </mat-cell>
+                </ng-container>
+                <!-- Project Column -->
+                <ng-container matColumnDef="project">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Project</mat-header-cell>
+                    <mat-cell *matCellDef="let a">{{a?.project}}</mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+            <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]"></mat-paginator>
+        </mat-card-content>
+    </mat-card>    
+</div>

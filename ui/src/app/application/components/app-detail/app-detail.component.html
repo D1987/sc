@@ -1,0 +1,30 @@
+<div *ngIf="loaded" >
+    <h2>{{app.name}}
+        <div class="right-position">
+            <mat-icon style="cursor: pointer;" routerLink="/vms" aria-label="Cancel">cancel</mat-icon>
+        </div>
+    </h2>   
+    <mat-card>
+        <mat-card-content>
+            <mat-card-title *ngIf="app?.ip;">IP -
+                    <a [attr.href]="'//' + app?.ip" target="_blank" >{{app?.ip}}</a>                
+            </mat-card-title>
+            <mat-card-title *ngIf="app?.domain;">Domain -
+                    <a [attr.href]="'//' + app?.domain" target="_blank" >{{app?.domain}}</a>
+            </mat-card-title>
+            <mat-card-title *ngIf="app?.project;">Projects - <span>{{app.project}}</span></mat-card-title>
+            <mat-card-title>Type - <span>{{app.type}}</span></mat-card-title>
+            <mat-card-title *ngIf="app?.critical;">Critical - <span>Yes</span></mat-card-title>
+            <mat-card-title *ngIf="!app?.enabled;">Enabled - <span>No</span></mat-card-title>
+            <mat-card-title *ngIf="app?.login;">Login - <span>{{app.login}}</span></mat-card-title>
+            <mat-card-title *ngIf="app?.password;">Password
+                <span *ngIf="hide" > - {{app.password}}</span>
+                <mat-icon style="vertical-align: bottom;" class="placeholder eye-pointer" (click)="hidePassword()"> {{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            </mat-card-title>
+            <mat-card-title>VIRTUAL MACHINE - 
+                <a [routerLink]="['/vms/vmdetail', app.vm.id]" class="nav-link">{{app.vm.name}}</a>
+            </mat-card-title>
+            <mat-card-title *ngIf="app?.description;">Description - <span>{{app.description}}</span></mat-card-title>
+        </mat-card-content>
+    </mat-card>    
+</div>

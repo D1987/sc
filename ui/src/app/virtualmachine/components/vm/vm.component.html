@@ -1,0 +1,25 @@
+<div *ngIf="added" class="left-padding">
+        <h2>New Virtual Machine</h2>
+        <app-vm-form [(vm)]="vm" [(vmForm)]="vmForm" ></app-vm-form>
+        <div class="form-group">
+            <input type="button"
+                value="Save"
+                (click)="openDialog()"
+                [disabled]="vmForm.invalid"
+                class="btn btn-success" />
+            <a routerLink="/vms" class="btn btn-warning">Cancel</a>
+        </div>
+</div>
+
+
+<div *ngIf="loaded" class="left-padding">
+    <h2>Update Virtual Machine</h2>
+    <app-vm-form [(vm)]="vm" [(vmForm)]="vmForm"></app-vm-form>
+    <div class="form-group">
+        <input type="button"
+               value="Save"
+               (click)="openDialog()"
+               [disabled]="vmForm.invalid" class="btn btn-success" />
+        <a routerLink="/vms" class="btn btn-warning">Cancel</a>
+    </div>    
+</div>

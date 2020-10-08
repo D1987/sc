@@ -1,0 +1,45 @@
+<div class="example-container">
+	<mat-toolbar color="primary" class="example-toolbar">
+		<button mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button>
+		<h1 class="example-app-name">AFRANS Servers</h1>
+		<span class="example-spacer"></span>
+		<mat-icon class="ml-3" title="Logout" (click)="logout()" style="cursor: pointer;">exit_to_app</mat-icon>		
+	</mat-toolbar>
+	<mat-sidenav-container class="example-sidenav-container"
+		autosize>
+		<mat-sidenav #sidenav mode="side" class="example-sidenav" opened="true">
+			<mat-nav-list>
+				<a routerLink="hosts">
+					<mat-list-item [routerLinkActive]="['is-active']">
+						<mat-icon mat-list-icon svgIcon="host"></mat-icon>
+						<div fxFlex="10"></div>
+						<div *ngIf="isExpanded || isShowing" class="sidenav-item">
+							<span> Hosts</span>
+						</div>			
+					</mat-list-item>
+				</a>
+				<a routerLink="vms">
+					<mat-list-item [routerLinkActive]="['is-active']">
+						<mat-icon mat-list-icon svgIcon="vm"></mat-icon>
+						<div fxFlex="10"></div>
+						<div *ngIf="isExpanded || isShowing" class="sidenav-item">
+							<span>Virtual Machines</span>
+						</div>				
+					</mat-list-item>
+				</a>
+				<a routerLink="apps">
+					<mat-list-item [routerLinkActive]="['is-active']">
+						<mat-icon mat-list-icon svgIcon="app"></mat-icon>
+						<div fxFlex="10"></div>
+						<div *ngIf="isExpanded || isShowing" class="sidenav-item">
+							<span>Applications</span>
+						</div>					
+					</mat-list-item>
+				</a>
+			</mat-nav-list>
+		</mat-sidenav>
+		<mat-sidenav-content *ngIf="!currentUser">
+			<router-outlet></router-outlet>
+		</mat-sidenav-content>
+	</mat-sidenav-container>
+</div>

@@ -1,0 +1,55 @@
+div {
+  flex: 50%;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+mat-card-title {
+  font-size: medium;
+  padding: 10px;
+}
+
+mat-card-subtitle {
+font-size: 18px;
+color: blue;
+font-style: italic;
+}
+
+table {
+width: 100%;
+}
+
+.mat-form-field {
+font-size: 14px;
+width: 100%;
+}
+
+mat-header-cell, mat-header-row, .mat-header-cell-def{
+min-height:25px;
+font-family:Verdana,sans-serif;
+font-weight:bold;
+font-size:13px;
+color: #1a084c;
+margin-bottom:5px;
+ top: 0;
+  position: sticky;
+  z-index: 1;
+  background-color: inherit;
+}
+
+mat-card-content span {
+color: darkblue;
+}
+
+.right-position {
+position: absolute; right: 0; top: 0;
+}
+
+a {
+font-size: medium;
+}
+
+.eye-pointer {
+  vertical-align: bottom;
+  cursor: pointer;
+}

@@ -1,0 +1,17 @@
+<div *ngIf="added" class="left-padding">
+    <h2>New Application</h2>
+    <app-app-form [(app)]="app" [(appForm)]="appForm"></app-app-form>
+    <div class="form-group">
+        <input type="button" value="Save" (click)="openDialog()" class="btn btn-success" [disabled]="appForm.invalid"/>
+        <a routerLink="/apps" class="btn btn-warning">Cancel</a>
+    </div>
+</div>
+
+<div *ngIf="loaded" class="left-padding">
+    <h2>Update Application</h2>
+    <app-app-form [(app)]="app" [(appForm)]="appForm"></app-app-form>
+    <div class="form-group">
+        <input type="button" value="Save" (click)="openDialog()" class="btn btn-success" [disabled]="appForm.invalid"/>
+        <a routerLink="/apps" class="btn btn-warning">Cancel</a>
+    </div>
+</div>

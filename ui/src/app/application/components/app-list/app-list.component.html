@@ -1,0 +1,70 @@
+<div class="mat-cell">
+  <h2>APPLICATIONS</h2>  
+  <mat-card>
+    <mat-card-content>
+      <div class="form">
+          <mat-form-field appearance="outline">
+              <mat-label>Search Application</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Type smth." [(ngModel)]="searchField" #input>
+              <mat-icon matPrefix>search</mat-icon>
+              <mat-icon matSuffix *ngIf="searchField" (click)="clearFilters()" class="cursor-pointer">clear</mat-icon>
+          </mat-form-field>
+      </div>  
+      <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">  
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+          <mat-cell *matCellDef="let app">
+              <a [routerLink]="['appdetail', app.id]">{{app?.name}}</a>            
+          </mat-cell>
+        </ng-container>
+        <!-- Project Column -->
+        <ng-container matColumnDef="project">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Projects</mat-header-cell>
+          <mat-cell *matCellDef="let app">{{app?.project}}</mat-cell>
+        </ng-container>
+        <!-- Domain Column -->
+        <ng-container matColumnDef="domain">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Domain</mat-header-cell>
+          <mat-cell *matCellDef="let app">
+            <a [attr.href]="'//' + app?.domain" target="_blank" >{{app?.domain}}</a>
+          </mat-cell>
+        </ng-container>         
+        <!-- Critical Column -->
+        <ng-container matColumnDef="critical">
+          <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Critical</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let app">
+            <mat-icon class="check-icon" *ngIf="app?.critical;">check</mat-icon>
+          </mat-cell>  
+        </ng-container>
+        <!-- Enabled Column -->
+        <ng-container matColumnDef="on">
+          <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>On</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let app">
+            <mat-icon class="off" *ngIf="!app?.enabled;">offline_pin</mat-icon>
+          </mat-cell>
+        </ng-container>
+        <!-- actions -->        
+        <ng-container matColumnDef="actions" >
+          <mat-header-cell *matHeaderCellDef class="align-right">
+            <button mat-icon-button color="primary" [routerLink]="['app', 0]">
+              <mat-icon aria-label="Add">add</mat-icon>
+            </button>
+          </mat-header-cell>  
+          <mat-cell *matCellDef="let app; let i=index;" class="align-right">
+            <button mat-icon-button color="primary" [routerLink]="['app', app.id]">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>  
+            <button mat-icon-button color="primary"(click)="openDialog(app.id, app.name)">
+              <mat-icon aria-label="Delete">delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>  
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>  
+      <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]"></mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>
+  

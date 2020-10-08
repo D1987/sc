@@ -1,0 +1,17 @@
+<div *ngIf="added" class="left-padding">
+    <h2>New Host</h2>
+    <app-host-form [(host)]="host" [(hostForm)]="hostForm"></app-host-form>
+    <div class="form-group">
+        <input type="button" value="Save" (click)="openDialog()" class="btn btn-success" [disabled]="hostForm.invalid"/>
+        <a routerLink="/hosts" class="btn btn-warning">Cancel</a>
+    </div>
+</div>
+
+<div *ngIf="loaded" class="left-padding">
+    <h2>Update Host</h2>
+    <app-host-form [(host)]="host" [(hostForm)]="hostForm"></app-host-form>
+    <div class="form-group">
+        <input type="button" value="Save" (click)="openDialog()" class="btn btn-success" [disabled]="hostForm.invalid"/>
+        <a routerLink="/hosts" class="btn btn-warning">Cancel</a>
+    </div>
+</div>
