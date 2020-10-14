@@ -2,6 +2,7 @@
 using Server.Services.Interfaces;
 using Server.Dtos.Security;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 
 namespace Server.Application.Controllers
 {
@@ -18,9 +19,9 @@ namespace Server.Application.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]AuthenticateRequest model)
+        public async Task<ActionResult<AuthenticateResponse>> Authenticate([FromBody]AuthenticateRequest model)
         {
-            var response = _userService.Authenticate(model);
+            var response = await _userService.Authenticate(model);
 
             if (response == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
