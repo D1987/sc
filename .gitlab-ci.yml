@@ -5,9 +5,9 @@
     - docker
 .common_only_master: &common_only_master
   only:
-    - dzimin/sc-2
+    - master
 
-stages:  
+stages:
   - generate_models
   - frontend_tests
   - build 

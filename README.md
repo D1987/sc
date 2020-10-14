@@ -1,3 +1,6 @@
+TO DO
+# hash passwords
+
 # edit detect changes in form
 # not update if wasnt changes
 # fix appear login form
@@ -8,17 +11,6 @@
 # to do common components
 # to do common c# projects' names
 # one import angular
-
-
-
-NOT USE:
-
-1. front -
-ngxs
-table lazy loading
-
-
-2. back - 
-services
-async in controllers
-autoMapping in Startup
+# ngxs
+# table lazy loading
+# services
