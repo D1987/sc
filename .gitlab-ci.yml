@@ -60,12 +60,12 @@ deploy:
   script:
     ## we need this hostkeychecking at first since it didn't verify the target host yet. you either verify it
     ## manually or leave it on first command to do it. Not really sure if it is the best way of handling this.
-    - ssh -o "StrictHostKeyChecking=no" -p22 $TARGET_USER "mkdir -p /home/oxuser/server/"
-    - scp -P22 -r ./* $TARGET_USER:/home/oxuser/server/
-    - ssh -p22 $TARGET_USER "docker rm --force server || true"
+    # - ssh -o "StrictHostKeyChecking=no" -p22 $TARGET_USER "mkdir -p /home/oxuser/datahub/"
+    # - scp -P22 -r ./* $TARGET_USER:/home/oxuser/datahub/
+    - ssh -p22 $TARGET_USER "docker rm --force datahub || true"
     - ssh -p22 $TARGET_USER "docker login "$REGISTRY" -u "$REGISTRY_USER" -p "$REGISTRY_PASSWORD" &&
       docker pull "$REGISTRY"/"$PROJECT_PATH":"${CI_PIPELINE_ID}" &&
-      docker run -d -p 80:5000 --restart always --name server "$REGISTRY"/"$PROJECT_PATH":"${CI_PIPELINE_ID}""
+      docker run -d -p 80:5000 --restart always --name datahub "$REGISTRY"/"$PROJECT_PATH":"${CI_PIPELINE_ID}""
 
 
 remove_unused_containers:
