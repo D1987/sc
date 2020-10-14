@@ -24,7 +24,7 @@ generate_models:
   <<: *common_tags
   script:
     - rm -rf "ui/src/app/models/generated" /s /q
-    - cd ../src/Server.Dtos/
+    - cd src/Server.Dtos/
     - dotnet build
     - cd ../../utils/Server.ModelsGenerator
     - dotnet run ts
