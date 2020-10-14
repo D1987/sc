@@ -56,7 +56,7 @@ deploy:
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - ssh-keyscan -H '192.168.4.65' >> ~/.ssh/known_hosts
+    - ssh-keyscan -H '192.168.4.109' >> ~/.ssh/known_hosts
   script:
     ## we need this hostkeychecking at first since it didn't verify the target host yet. you either verify it
     ## manually or leave it on first command to do it. Not really sure if it is the best way of handling this.
@@ -65,7 +65,7 @@ deploy:
     - ssh -p22 $TARGET_USER "docker rm --force server || true"
     - ssh -p22 $TARGET_USER "docker login "$REGISTRY" -u "$REGISTRY_USER" -p "$REGISTRY_PASSWORD" &&
       docker pull "$REGISTRY"/"$PROJECT_PATH":"${CI_PIPELINE_ID}" &&
-      docker run -d -p 83:5000 --restart always --name server "$REGISTRY"/"$PROJECT_PATH":"${CI_PIPELINE_ID}""
+      docker run -d -p 80:5000 --restart always --name server "$REGISTRY"/"$PROJECT_PATH":"${CI_PIPELINE_ID}""
 
 
 remove_unused_containers:
