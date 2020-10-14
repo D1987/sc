@@ -7,9 +7,6 @@
   only:
     - dzimin/sc-1
 
-variables:
-    uiDir: "ui"
-
 stages:  
   - generate_models
   - frontend_tests
@@ -28,10 +25,6 @@ generate_models:
     - dotnet build
     - cd ../../utils/Server.ModelsGenerator
     - dotnet run ts
-  artifacts:
-    paths:
-      - $uiDir
-    expire_in: 1 week
 
 build:
   stage: build
