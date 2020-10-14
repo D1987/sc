@@ -17,7 +17,7 @@ namespace Server.Dal
 
         public static void Seed(ServerContext context)
         {
-            SeedUsers(context, "serveradmin@talrace.com", "Tor21log!");
+            SeedUsers(context, "serveradmin@talrace.com", "Daf20log!");
         }
 
         private static void SeedUsers(ServerContext context, string email, string userPassword)

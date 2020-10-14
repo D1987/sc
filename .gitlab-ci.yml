@@ -5,7 +5,7 @@
     - docker
 .common_only_master: &common_only_master
   only:
-    - dzimin/sc-1
+    - master
 
 stages:  
   - generate_models
