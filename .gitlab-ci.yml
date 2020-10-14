@@ -1,0 +1,78 @@
+.common_images: &common_images
+  image: mcr.microsoft.com/dotnet/core/sdk:3.1.300
+.common_tags: &common_tags
+  tags:
+    - docker
+.common_only_master: &common_only_master
+  only:
+    - dzimin/sc-1
+
+variables:
+    uiDir: "ui"
+
+stages:  
+  - generate_models
+  - frontend_tests
+  - build 
+  - deploy
+  - remove_unused_containers
+
+generate_models:
+  stage: generate_models
+  <<: *common_images
+  <<: *common_only_master
+  <<: *common_tags
+  script:
+    - rm -rf "ui/src/app/models/generated" /s /q
+    - cd ../src/Server.Dtos/
+    - dotnet build
+    - cd ../../utils/Server.ModelsGenerator
+    - dotnet run ts
+  artifacts:
+    paths:
+      - $uiDir
+    expire_in: 1 week
+
+build:
+  stage: build
+  <<: *common_only_master
+  <<: *common_tags
+  before_script:
+    - docker login "$REGISTRY" -u "$REGISTRY_USER" -p "$REGISTRY_PASSWORD"
+  script:
+    - docker build -t "$REGISTRY"/"$PROJECT_PATH":"${CI_PIPELINE_ID}" -f deploy/Dockerfile .
+    - docker push "$REGISTRY"/"$PROJECT_PATH":"${CI_PIPELINE_ID}"
+  after_script:
+    - docker logout "$REGISTRY"
+    - docker image rm "$REGISTRY"/"$PROJECT_PATH":"${CI_PIPELINE_ID}"
+
+deploy:
+  stage: deploy
+  <<: *common_only_master
+  <<: *common_tags
+  before_script:
+    - 'which ssh-agent || ( apk add openssh-client)'
+    - eval "$(ssh-agent -s)"
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan -H '192.168.4.65' >> ~/.ssh/known_hosts
+  script:
+    ## we need this hostkeychecking at first since it didn't verify the target host yet. you either verify it
+    ## manually or leave it on first command to do it. Not really sure if it is the best way of handling this.
+    - ssh -o "StrictHostKeyChecking=no" -p22 $TARGET_USER "mkdir -p /home/oxuser/server/"
+    - scp -P22 -r ./* $TARGET_USER:/home/oxuser/server/
+    - ssh -p22 $TARGET_USER "docker rm --force server || true"
+    - ssh -p22 $TARGET_USER "docker login "$REGISTRY" -u "$REGISTRY_USER" -p "$REGISTRY_PASSWORD" &&
+      docker pull "$REGISTRY"/"$PROJECT_PATH":"${CI_PIPELINE_ID}" &&
+      docker run -d -p 83:5000 --restart always --name server "$REGISTRY"/"$PROJECT_PATH":"${CI_PIPELINE_ID}""
+
+
+remove_unused_containers:
+  stage: remove_unused_containers
+  <<: *common_only_master
+  <<: *common_tags
+  script:
+    - (if  [ $(docker ps -a | grep $CONTAINER_NAME | cut -d " " -f1) ]; then echo $(docker rm -f $CONTAINER_NAME); else echo OK; fi;);
+    - (if  [ $(docker volume ls -qf dangling=true) ]; then echo $(docker volume prune -f); else echo OK; fi;);
+    - docker system prune --all --force
