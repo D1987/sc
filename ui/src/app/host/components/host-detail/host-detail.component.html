@@ -6,14 +6,14 @@
     </h2>    
     <mat-card>
         <mat-card-content>            
-            <mat-card-title>IP - <span>{{host.ip}}</span></mat-card-title>
-            <mat-card-title>OS - <span>{{host.os}}</span></mat-card-title>
-            <mat-card-title>Login - <span>{{host.login}}</span></mat-card-title>
-            <mat-card-title>Password
+            <mat-card-title *ngIf="host?.ip">IP - <span>{{host.ip}}</span></mat-card-title>
+            <mat-card-title *ngIf="host?.os">OS - <span>{{host.os}}</span></mat-card-title>
+            <mat-card-title *ngIf="host?.login">Login - <span>{{host.login}}</span></mat-card-title>
+            <mat-card-title *ngIf="host?.password">Password
                 <span *ngIf="hide" > - {{host.password}}</span>
                 <mat-icon style="vertical-align: bottom;" class="placeholder eye-pointer" (click)="hidePassword()"> {{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
             </mat-card-title>
-            <mat-card-title>Location - <span>{{host.location}}</span></mat-card-title>
+            <mat-card-title *ngIf="host?.location">Location - <span>{{host.location}}</span></mat-card-title>
             <mat-card-title *ngIf="host?.description;">Description - <span>{{host.description}}</span></mat-card-title>            
         </mat-card-content>
     </mat-card>
@@ -43,7 +43,7 @@
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             </mat-table>
-            <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]"></mat-paginator>
+            <mat-paginator [pageSizeOptions]="[100,200,300,400]"></mat-paginator>
         </mat-card-content>
     </mat-card>
 </div>

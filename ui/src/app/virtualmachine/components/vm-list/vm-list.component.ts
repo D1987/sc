@@ -7,6 +7,8 @@ import { DialogComponent } from 'src/app/dialogs/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 
+// const ipInt = require('ip-to-int');
+
 @Component({
   selector: 'app-vm-list',
   templateUrl: './vm-list.component.html',
@@ -18,7 +20,7 @@ export class VMListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchField;
   displayedColumns: string[] = ['name', 'ip', 'critical', 'on', 'actions'];
-  dataSource: MatTableDataSource<VM>;  
+  dataSource: MatTableDataSource<VM>;
   
   constructor(private vmService: VMService, private dialog: MatDialog) { }
 
@@ -30,6 +32,20 @@ export class VMListComponent implements OnInit {
       this.vmService.getAll().subscribe(
         (data: VM[]) => {
         this.dataSource = new MatTableDataSource<VM>(data);
+        this.dataSource.sortingDataAccessor = (item, property) => {
+          switch(property) {
+            case 'ip': {
+              var ipl=0;
+              item.ip.split('.').forEach(function( octet ) {
+                  ipl<<=8;
+                  ipl+=parseInt(octet);
+              });
+              return(ipl >>>0);
+            }
+            default: {
+              return item[property];}
+          }                
+        };
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });

@@ -6,7 +6,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/dialogs/dialog/dialog.component';
 import { MatPaginator } from '@angular/material/paginator';
-import { ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-app-list',
@@ -20,7 +19,7 @@ export class AppListComponent implements OnInit {
   searchField;
 
 
-  displayedColumns: string[] = ['name', 'project', 'domain', 'critical', 'on', 'actions'];
+  displayedColumns: string[] = ['name', 'project', 'domain', 'ip', 'critical', 'on', 'actions'];
   dataSource: MatTableDataSource<App>;
   app: App;
   
@@ -35,6 +34,20 @@ export class AppListComponent implements OnInit {
     this.appService.getAll().subscribe(
       (data: App[]) => {
         this.dataSource = new MatTableDataSource<App>(data);
+        this.dataSource.sortingDataAccessor = (item, property) => {
+          switch(property) {
+            case 'ip': {
+              var ipl=0;
+              item.ip.split('.').forEach(function( octet ) {
+                  ipl<<=8;
+                  ipl+=parseInt(octet);
+              });
+              return(ipl >>>0);
+            }
+            default: {
+              return item[property];}
+          }                
+        };
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       }

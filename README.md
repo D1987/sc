@@ -7,7 +7,6 @@ TO DO
 # dark view
 # copy icon for login/password
 # load not all data from method get all
-# slow load table on initial
 # to do common components
 # to do common c# projects' names
 # one import angular

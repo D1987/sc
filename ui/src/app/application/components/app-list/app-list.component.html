@@ -29,18 +29,25 @@
           <mat-cell *matCellDef="let app">
             <a [attr.href]="'//' + app?.domain" target="_blank" >{{app?.domain}}</a>
           </mat-cell>
-        </ng-container>         
+        </ng-container>
+        <!-- IP Column -->
+        <ng-container matColumnDef="ip">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>IP</mat-header-cell>
+          <mat-cell *matCellDef="let app">
+            <a [attr.href]="'//' + app?.ip" target="_blank" >{{app?.ip}}</a>
+          </mat-cell>      
+        </ng-container>        
         <!-- Critical Column -->
         <ng-container matColumnDef="critical">
-          <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Critical</mat-header-cell>
-          <mat-cell mat-cell *matCellDef="let app">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Critical</mat-header-cell>
+          <mat-cell *matCellDef="let app">
             <mat-icon class="check-icon" *ngIf="app?.critical;">check</mat-icon>
           </mat-cell>  
         </ng-container>
         <!-- Enabled Column -->
         <ng-container matColumnDef="on">
-          <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>On</mat-header-cell>
-          <mat-cell mat-cell *matCellDef="let app">
+          <mat-header-cell *matHeaderCellDef>On</mat-header-cell>
+          <mat-cell *matCellDef="let app">
             <mat-icon class="off" *ngIf="!app?.enabled;">offline_pin</mat-icon>
           </mat-cell>
         </ng-container>
@@ -63,7 +70,7 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>  
-      <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]"></mat-paginator>
+      <mat-paginator [pageSizeOptions]="[100,200,300,400]"></mat-paginator>
     </mat-card-content>
   </mat-card>
 </div>
