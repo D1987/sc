@@ -5,6 +5,8 @@ import { VMService } from 'src/app/virtualmachine/services/vm.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material/icon';
 
 @Component({
   selector: 'app-vm-detail',
@@ -24,8 +26,15 @@ export class VMDetailComponent implements OnInit {
   hide: boolean = false;
   searchField;
 
-  constructor(private VMService: VMService, activeRoute: ActivatedRoute) {
+  constructor(
+    private VMService: VMService,
+    activeRoute: ActivatedRoute,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer) {
     this.id = Number.parseInt(activeRoute.snapshot.params["id"]);
+    this.matIconRegistry.addSvgIcon(
+      "copy",
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/copy-content.svg'));
   }
 
   ngOnInit() {

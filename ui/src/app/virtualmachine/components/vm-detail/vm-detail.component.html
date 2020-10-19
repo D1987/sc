@@ -9,12 +9,18 @@
             <mat-card-title>IP -
                 <a [attr.href]="'//' + vm?.ip" target="_blank" >{{vm?.ip}}</a>                
             </mat-card-title>
-            <mat-card-title *ngIf="vm?.os">OS - <span>{{vm.os}}</span></mat-card-title>
+            <mat-card-title *ngIf="vm?.os">OS - <span>{{vm?.os}}</span></mat-card-title>
             <mat-card-title *ngIf="vm?.critical;">Critical - <span>Yes</span></mat-card-title>
-            <mat-card-title *ngIf="vm?.login;">Login - <span>{{vm.login}}</span></mat-card-title>
+            <mat-card-title *ngIf="vm?.login;">Login - 
+                <span>{{vm?.login}}
+                    <mat-icon class="placeholder eye-pointer copy-icon" mat-list-icon svgIcon="copy" [cdkCopyToClipboard]="vm?.login"></mat-icon>
+                </span>
+            </mat-card-title>
             <mat-card-title *ngIf="vm?.password;">Password
-                <span *ngIf="hide" > - {{vm.password}}</span>
-                <mat-icon style="vertical-align: bottom;" class="placeholder eye-pointer" (click)="hidePassword()"> {{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <span *ngIf="hide" > - {{vm?.password }} 
+                    <mat-icon class="placeholder eye-pointer copy-icon" mat-list-icon svgIcon="copy" [cdkCopyToClipboard]="vm?.password"></mat-icon>
+                </span>
+                <mat-icon class="placeholder eye-pointer" (click)="hidePassword()"> {{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
             </mat-card-title>
             <mat-card-title *ngIf="!vm?.enabled;">Enabled - <span>No</span></mat-card-title>
             <mat-card-title>HOST - 

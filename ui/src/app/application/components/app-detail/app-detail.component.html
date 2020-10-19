@@ -16,10 +16,16 @@
             <mat-card-title>Type - <span>{{app.type}}</span></mat-card-title>
             <mat-card-title *ngIf="app?.critical;">Critical - <span>Yes</span></mat-card-title>
             <mat-card-title *ngIf="!app?.enabled;">Enabled - <span>No</span></mat-card-title>
-            <mat-card-title *ngIf="app?.login;">Login - <span>{{app.login}}</span></mat-card-title>
+            <mat-card-title *ngIf="app?.login;">Login - 
+                <span>{{app.login}}
+                    <mat-icon class="placeholder eye-pointer copy-icon" mat-list-icon svgIcon="copy" [cdkCopyToClipboard]="app?.login"></mat-icon>
+                </span>
+            </mat-card-title>
             <mat-card-title *ngIf="app?.password;">Password
-                <span *ngIf="hide" > - {{app.password}}</span>
-                <mat-icon style="vertical-align: bottom;" class="placeholder eye-pointer" (click)="hidePassword()"> {{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <span *ngIf="hide"> - {{app.password }}
+                    <mat-icon class="placeholder eye-pointer copy-icon" mat-list-icon svgIcon="copy" [cdkCopyToClipboard]="app?.password"></mat-icon>
+                </span>
+                <mat-icon class="placeholder eye-pointer" (click)="hidePassword()"> {{hide ? 'visibility' : 'visibility_off'}}</mat-icon>                
             </mat-card-title>
             <mat-card-title>VIRTUAL MACHINE - 
                 <a [routerLink]="['/vms/vmdetail', app.vm.id]" class="nav-link">{{app.vm.name}}</a>

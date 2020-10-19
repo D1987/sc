@@ -36,20 +36,18 @@
           <mat-cell *matCellDef="let app">
             <a [attr.href]="'//' + app?.ip" target="_blank" >{{app?.ip}}</a>
           </mat-cell>      
-        </ng-container>        
+        </ng-container>
+        <!-- Type Column -->
+        <ng-container matColumnDef="type">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
+          <mat-cell *matCellDef="let app">{{app?.type}}</mat-cell>      
+        </ng-container>     
         <!-- Critical Column -->
         <ng-container matColumnDef="critical">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Critical</mat-header-cell>
           <mat-cell *matCellDef="let app">
             <mat-icon class="check-icon" *ngIf="app?.critical;">check</mat-icon>
           </mat-cell>  
-        </ng-container>
-        <!-- Enabled Column -->
-        <ng-container matColumnDef="on">
-          <mat-header-cell *matHeaderCellDef>On</mat-header-cell>
-          <mat-cell *matCellDef="let app">
-            <mat-icon class="off" *ngIf="!app?.enabled;">offline_pin</mat-icon>
-          </mat-cell>
         </ng-container>
         <!-- actions -->        
         <ng-container matColumnDef="actions" >

@@ -5,7 +5,6 @@ TO DO
 # fix appear login form
 # check create/edit one path
 # dark view
-# copy icon for login/password
 # load not all data from method get all
 # to do common components
 # to do common c# projects' names

@@ -6,12 +6,18 @@
     </h2>    
     <mat-card>
         <mat-card-content>            
-            <mat-card-title *ngIf="host?.ip">IP - <span>{{host.ip}}</span></mat-card-title>
-            <mat-card-title *ngIf="host?.os">OS - <span>{{host.os}}</span></mat-card-title>
-            <mat-card-title *ngIf="host?.login">Login - <span>{{host.login}}</span></mat-card-title>
+            <mat-card-title *ngIf="host?.ip">IP - <span>{{host?.ip}}</span></mat-card-title>
+            <mat-card-title *ngIf="host?.os">OS - <span>{{host?.os}}</span></mat-card-title>
+            <mat-card-title *ngIf="host?.login">Login - 
+                <span>{{host?.login}}
+                    <mat-icon class="placeholder eye-pointer copy-icon" mat-list-icon svgIcon="copy" [cdkCopyToClipboard]="host?.login"></mat-icon>
+                </span>
+            </mat-card-title>
             <mat-card-title *ngIf="host?.password">Password
-                <span *ngIf="hide" > - {{host.password}}</span>
-                <mat-icon style="vertical-align: bottom;" class="placeholder eye-pointer" (click)="hidePassword()"> {{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <span *ngIf="hide" > - {{host?.password }} 
+                    <mat-icon class="placeholder eye-pointer copy-icon" mat-list-icon svgIcon="copy" [cdkCopyToClipboard]="host?.password"></mat-icon>
+                </span>
+                <mat-icon class="placeholder eye-pointer" (click)="hidePassword()"> {{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
             </mat-card-title>
             <mat-card-title *ngIf="host?.location">Location - <span>{{host.location}}</span></mat-card-title>
             <mat-card-title *ngIf="host?.description;">Description - <span>{{host.description}}</span></mat-card-title>            

@@ -43,7 +43,8 @@ export class VMListComponent implements OnInit {
               return(ipl >>>0);
             }
             default: {
-              return item[property];}
+              return item[property];
+            }
           }                
         };
         this.dataSource.sort = this.sort;

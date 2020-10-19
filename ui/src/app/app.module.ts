@@ -18,7 +18,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { appRouterProviders } from './app-routing.module';
 import { DialogComponent } from './dialogs/dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconRegistry } from '@angular/material/icon';
   
 @NgModule({
     imports: [ 

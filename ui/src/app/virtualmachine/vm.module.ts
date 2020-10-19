@@ -20,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/rad
     MatCardModule,
     MatGridListModule,
     MatRadioModule,
-    FormsModule
+    FormsModule,
+    ClipboardModule
   ],
   providers: [ 
     VMService,

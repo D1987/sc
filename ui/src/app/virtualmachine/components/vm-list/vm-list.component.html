@@ -34,7 +34,7 @@
         </ng-container>
         <!-- Enabled Column -->
         <ng-container matColumnDef="on">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>On</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef>On</mat-header-cell>
           <mat-cell *matCellDef="let vm">
             <mat-icon class="off" *ngIf="!vm?.enabled;">offline_pin</mat-icon>
           </mat-cell>

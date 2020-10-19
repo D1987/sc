@@ -19,7 +19,7 @@ export class AppListComponent implements OnInit {
   searchField;
 
 
-  displayedColumns: string[] = ['name', 'project', 'domain', 'ip', 'critical', 'on', 'actions'];
+  displayedColumns: string[] = ['name', 'project', 'domain', 'ip', 'type', 'critical', 'actions'];
   dataSource: MatTableDataSource<App>;
   app: App;
   
