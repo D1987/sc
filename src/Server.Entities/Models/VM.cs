@@ -20,8 +20,8 @@ namespace Server.Entities.Models
         public bool Critical { get; set; }
         public bool Enabled { get; set; }
 
-        public int? HostId { get; set; }
-        public Host? Host { get; set; }
+        public int HostId { get; set; }
+        public Host Host { get; set; }
 
         public ICollection<App> Apps { get; set; }
     }
