@@ -32,6 +32,9 @@ export class AppComponent implements OnInit {
     type: ['Application', [Validators.required]],
     enabled: ['true', [Validators.required]],
     critical: ['true', [Validators.required]],
+    host: this.formBuilder.group({
+      id: ['', [Validators.required]]
+    }),
     vm: this.formBuilder.group({
       id: ['', [Validators.required]]
     })
@@ -62,6 +65,7 @@ export class AppComponent implements OnInit {
             this.appForm.get('type').setValue(data.type);
             this.appForm.get('critical').setValue(data.critical);
             this.appForm.get('enabled').setValue(data.enabled);
+            this.appForm.get('host.id').setValue(data.host.id);
             this.appForm.get('vm.id').setValue(data.vm.id);
             if (this.appForm != null) this.added = false; this.loaded = true;
         });

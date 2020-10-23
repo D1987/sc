@@ -14,6 +14,9 @@
         public bool Critical { get; set; }
         public bool Enabled { get; set; }
 
+        public int? HostId { get; set; }
+        public Host? Host { get; set; }
+
         public int VmId { get; set; }
         public VM Vm { get; set; }
     }

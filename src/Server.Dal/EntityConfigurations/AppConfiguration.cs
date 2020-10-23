@@ -12,6 +12,11 @@ namespace Server.Dal.EntityConfigurations
                 .HasOne(c => c.Vm)
                 .WithMany(m => m.Apps)
                 .HasForeignKey(c => c.VmId);
+
+            builder
+                .HasOne(c => c.Host)
+                .WithMany(m => m.Apps)
+                .HasForeignKey(c => c.HostId);
         }
     }
 }

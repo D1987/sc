@@ -26,7 +26,7 @@ namespace Server.Application.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Host>> Get(int id)
         {
-            Host Host = await db.Hosts.Include(v => v.Vms).FirstOrDefaultAsync(x => x.Id == id);
+            Host Host = await db.Hosts.Include(v => v.Vms).Include(a => a.Apps).FirstOrDefaultAsync(x => x.Id == id);
             return Ok(Host);
         }
 

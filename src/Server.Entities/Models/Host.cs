@@ -8,6 +8,7 @@ namespace Server.Entities.Models
         public Host()
         {
             Vms = new Collection<VM>();
+            Apps = new Collection<App>();
         }
 
         public int Id { get; set; }
@@ -21,5 +22,6 @@ namespace Server.Entities.Models
         public bool Enabled { get; set; }
 
         public ICollection<VM> Vms { get; set; }
+        public ICollection<App> Apps { get; set; }
     }
 }

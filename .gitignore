@@ -228,25 +228,14 @@ __pycache__/
 aot/
 
 # TypeScript compilation files
-src/OxSports.Ui/src/app/**/*.js
-src/OxSports.Ui/src/app/**/*.map
-src/OxSports.Ui/src/app/*.js
-src/OxSports.Ui/src/app/*.map
-src/OxSports.Ui/src/*.js
-src/OxSports.Ui/src/*.map
-src/OxSports.Ui/wwwroot
+src/Server.Ui/src/app/**/*.js
+src/Server.Ui/src/app/**/*.map
+src/Server.Ui/src/app/*.js
+src/Server.Ui/src/app/*.map
+src/Server.Ui/src/*.js
+src/Server.Ui/src/*.map
+src/Server.Ui/wwwroot
 
-# Google Storage Key config file
-services/OxSports.Parser.API/gs-key.json
-
-# Content custom
-src/OxSports.Application/Content/*
-OxSportsParser/Content/*
-# Chat
-ios/oxchat/www/
-ios/oxchat/node_modules/
-ios/oxchat/platforms/
-ios/oxchat/plugins/
 # environment
 ui/environments/environment-url.ts
 ui/tests.bat

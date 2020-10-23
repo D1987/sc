@@ -34,7 +34,7 @@ namespace Server.Application.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<App>> Get(int id)
         {
-            App App = await db.Apps.Include(v => v.Vm).FirstOrDefaultAsync(x => x.Id == id);
+            App App = await db.Apps.Include(v => v.Vm).Include(h => h.Host).FirstOrDefaultAsync(x => x.Id == id);
             return Ok(App);
         }
 
