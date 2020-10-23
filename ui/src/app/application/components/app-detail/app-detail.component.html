@@ -27,8 +27,11 @@
                 </span>
                 <mat-icon class="placeholder eye-pointer" (click)="hidePassword()"> {{hide ? 'visibility' : 'visibility_off'}}</mat-icon>                
             </mat-card-title>
-            <mat-card-title>VIRTUAL MACHINE - 
+            <mat-card-title *ngIf="app?.vm;">VIRTUAL MACHINE - 
                 <a [routerLink]="['/vms/vmdetail', app.vm.id]" class="nav-link">{{app.vm.name}}</a>
+            </mat-card-title>
+            <mat-card-title *ngIf="app?.host;">HOST - 
+                <a [routerLink]="['/hosts/hostdetail', app.host.id]" class="nav-link">{{app?.host?.name}}</a>
             </mat-card-title>
             <mat-card-title *ngIf="app?.description;">Description - <span>{{app.description}}</span></mat-card-title>
         </mat-card-content>

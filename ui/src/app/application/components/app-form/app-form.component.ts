@@ -5,6 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AppType } from '../../../helpers/enums/apptype';
 import { Pattern } from 'src/app/helpers/validators/patterns';
 import { HostService } from 'src/app/host/services/host.service';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-app-form',
@@ -41,8 +42,10 @@ export class AppFormComponent implements OnInit {
   vms: VM[];
   selectedValue: string;
   hide: boolean = true;  
-  keys = Object.keys;
-  appTypes = AppType;
+  // keys = Object.keys;
+  // appTypes = AppType;
+  // timeForm: any;
+
 
   constructor(
       private hostService: HostService,
@@ -52,6 +55,7 @@ export class AppFormComponent implements OnInit {
   ngOnInit() {
     this.loadHosts();
     this.loadVMs();
+    this.onChanges();
   }
 
   loadHosts(): void {
@@ -65,4 +69,29 @@ export class AppFormComponent implements OnInit {
   hidePassword() {
     this.hide = !this.hide;
   }
+
+  onChanges() {
+      this.appForm.get('host.id').valueChanges.pipe(distinctUntilChanged())
+      .subscribe(id => {
+          if (id != null) {
+              this.appForm.get('vm').reset();
+              this.appForm.get('vm').disable();
+          }
+          else {
+              this.appForm.get('vm').enable();
+          }
+      });
+
+      this.appForm.get('vm.id').valueChanges.pipe(distinctUntilChanged())
+      .subscribe(id => {
+          if (id != null) {
+              this.appForm.get('host').reset();
+              this.appForm.get('host').disable();
+          }
+          else {
+              this.appForm.get('host').enable();
+          }
+      });
+  }  
+  
 }
