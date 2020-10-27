@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     MatIconModule,
     MatCardModule,
     FormsModule,
-    ClipboardModule
+    ClipboardModule,
+    MatTabsModule
   ],
   providers: [ HostService ]
 })

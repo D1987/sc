@@ -13,3 +13,4 @@ TO DO
 # ngxs
 # table lazy loading
 # services
+# if host autofill ip... for application

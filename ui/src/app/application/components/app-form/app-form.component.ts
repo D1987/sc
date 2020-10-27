@@ -42,9 +42,9 @@ export class AppFormComponent implements OnInit {
   vms: VM[];
   selectedValue: string;
   hide: boolean = true;  
-  // keys = Object.keys;
-  // appTypes = AppType;
-  // timeForm: any;
+  keys = Object.keys;
+  appTypes = AppType;
+  timeForm: any;
 
 
   constructor(
@@ -73,7 +73,7 @@ export class AppFormComponent implements OnInit {
   onChanges() {
       this.appForm.get('host.id').valueChanges.pipe(distinctUntilChanged())
       .subscribe(id => {
-          if (id != null) {
+          if (id !== null && id !== 0 && id !== undefined) {
               this.appForm.get('vm').reset();
               this.appForm.get('vm').disable();
           }
@@ -84,7 +84,7 @@ export class AppFormComponent implements OnInit {
 
       this.appForm.get('vm.id').valueChanges.pipe(distinctUntilChanged())
       .subscribe(id => {
-          if (id != null) {
+          if (id !== null && id !== 0 && id !== undefined) {
               this.appForm.get('host').reset();
               this.appForm.get('host').disable();
           }
