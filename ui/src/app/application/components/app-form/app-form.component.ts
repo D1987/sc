@@ -1,9 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Host } from '@angular/core';
 import { VM } from 'src/app/models/generated/v-m';
 import { VMService } from 'src/app/virtualmachine/services/vm.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AppType } from '../../../helpers/enums/apptype';
 import { Pattern } from 'src/app/helpers/validators/patterns';
+import { HostService } from 'src/app/host/services/host.service';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-app-form',
@@ -28,22 +30,36 @@ export class AppFormComponent implements OnInit {
     type: ['Application', [Validators.required]],
     critical: ['true', [Validators.required]],
     enabled: ['true', [Validators.required]],
+    host: this.formBuilder.group({
+      id: ['', [Validators.required]]
+    }),
     vm: this.formBuilder.group({
       id: ['', [Validators.required]]
     })
   }); 
 
+  hosts: Host[];
   vms: VM[];
   selectedValue: string;
   hide: boolean = true;  
   keys = Object.keys;
   appTypes = AppType;
+  timeForm: any;
 
-  constructor(private vmService: VMService,
-              private formBuilder: FormBuilder) {}
+
+  constructor(
+      private hostService: HostService,
+      private vmService: VMService,
+      private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.loadVMs();    
+    this.loadHosts();
+    this.loadVMs();
+    this.onChanges();
+  }
+
+  loadHosts(): void {
+    this.hostService.getAll().subscribe((data: Host[]) => this.hosts = data);
   }
 
   loadVMs(): void {
@@ -53,4 +69,29 @@ export class AppFormComponent implements OnInit {
   hidePassword() {
     this.hide = !this.hide;
   }
+
+  onChanges() {
+      this.appForm.get('host.id').valueChanges.pipe(distinctUntilChanged())
+      .subscribe(id => {
+          if (id !== null && id !== 0 && id !== undefined) {
+              this.appForm.get('vm').reset();
+              this.appForm.get('vm').disable();
+          }
+          else {
+              this.appForm.get('vm').enable();
+          }
+      });
+
+      this.appForm.get('vm.id').valueChanges.pipe(distinctUntilChanged())
+      .subscribe(id => {
+          if (id !== null && id !== 0 && id !== undefined) {
+              this.appForm.get('host').reset();
+              this.appForm.get('host').disable();
+          }
+          else {
+              this.appForm.get('host').enable();
+          }
+      });
+  }  
+  
 }

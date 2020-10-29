@@ -1,5 +1,6 @@
 TO DO
 # hash passwords
+# error message for mat-select
 # edit detect changes in form
 # not update if wasnt changes
 # fix appear login form
@@ -12,3 +13,4 @@ TO DO
 # ngxs
 # table lazy loading
 # services
+# if host autofill ip... for application

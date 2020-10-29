@@ -12,7 +12,7 @@ namespace Server.Dal
             : base(options)
         {
             //Database.EnsureDeleted();
-           // Database.EnsureCreated();
+           //Database.EnsureCreated();
         }
 
         public DbSet<Host> Hosts { get; set; }
@@ -22,8 +22,6 @@ namespace Server.Dal
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            //builder.ApplyConfigurationsFromAssembly(typeof(ServerContext).Assembly);
 
             builder
                 .ApplyConfiguration(new AppConfiguration())

@@ -18,5 +18,6 @@ namespace Server.Dtos
         public bool Enabled { get; set; }
 
         public List<VM> Vms { get; set; }
+        public List<App> Apps { get; set; }
     }
 }

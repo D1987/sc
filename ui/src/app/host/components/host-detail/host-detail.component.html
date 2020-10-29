@@ -25,31 +25,67 @@
     </mat-card>
 </div>
 
-<div>
-    <h2>Virtual Machines</h2>
-    <mat-card>
-        <mat-card-content>
-            <div class="form">
-                <mat-form-field appearance="outline">
-                    <mat-label>Search Virtual Machines</mat-label>
-                    <input matInput (keyup)="applyFilter($event)" placeholder="Type smth." [(ngModel)]="searchField" #input>
-                    <mat-icon matPrefix>search</mat-icon>
-                    <mat-icon matSuffix *ngIf="searchField" (click)="clearFilters()" class="cursor-pointer">clear</mat-icon>
-                </mat-form-field>
-            </div>
-            <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
-                <!-- Name Column -->
-                <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-                    <mat-cell *matCellDef="let vm">
-                        <a [routerLink]="['/vms/vmdetail', vm?.id]">{{vm?.name}}</a>            
-                    </mat-cell>
-                </ng-container>
-
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            </mat-table>
-            <mat-paginator [pageSizeOptions]="[100,200,300,400]"></mat-paginator>
-        </mat-card-content>
-    </mat-card>
-</div>
+<mat-tab-group [dynamicHeight]='true' #tabGroup (selectedTabChange)="clearFilters()">
+    <mat-tab label="Virtual Machines">
+        <mat-card *ngIf="shownVm; else vmElseBlock">
+            <mat-card-content>
+                <div class="form">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Search Virtual Machines</mat-label>
+                        <input matInput (keyup)="applyFilterVm($event)" placeholder="Type smth." [(ngModel)]="searchField" #input>
+                        <mat-icon matPrefix>search</mat-icon>
+                        <mat-icon matSuffix *ngIf="searchField" (click)="clearFiltersVm()" class="cursor-pointer">clear</mat-icon>
+                    </mat-form-field>
+                </div>
+                <mat-table #table [dataSource]="dataSourceVm" matSort class="mat-cell">
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                        <mat-cell *matCellDef="let vm">
+                            <a [routerLink]="['/vms/vmdetail', vm?.id]">{{vm?.name}}</a>            
+                        </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedVmColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedVmColumns;"></mat-row>
+                </mat-table>
+                <mat-paginator #paginatorVm [pageSize]="100" [pageSizeOptions]="[10,50,100,200]"></mat-paginator>
+            </mat-card-content>
+        </mat-card>
+        <ng-template #vmElseBlock>
+            <p class="template">No virtual machines</p>
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Applications">
+        <mat-card *ngIf="shownApp; else appElseBlock">
+            <mat-card-content>
+                <div class="form">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Search Applications</mat-label>
+                        <input matInput (keyup)="applyFilterApp($event)" placeholder="Type smth." [(ngModel)]="searchField" #input>
+                        <mat-icon matPrefix>search</mat-icon>
+                        <mat-icon matSuffix *ngIf="searchField" (click)="clearFiltersApp()" class="cursor-pointer">clear</mat-icon>
+                    </mat-form-field>
+                </div>
+                <mat-table #table [dataSource]="dataSourceApp" matSort class="mat-cell">
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                        <mat-cell *matCellDef="let app">
+                            <a [routerLink]="['/apps/appdetail', app?.id]">{{app?.name}}</a>            
+                        </mat-cell>
+                    </ng-container>
+                    <!-- Project Column -->
+                    <ng-container matColumnDef="project">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Project</mat-header-cell>
+                        <mat-cell *matCellDef="let app">{{app?.project}}</mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedAppColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedAppColumns;"></mat-row>
+                </mat-table>
+                <mat-paginator #paginatorApp [pageSize]="100" [pageSizeOptions]="[10,50,100,200]"></mat-paginator>
+            </mat-card-content>
+        </mat-card>
+        <ng-template #appElseBlock>
+            <p class="template">No applications</p>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>

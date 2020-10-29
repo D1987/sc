@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { HostService } from '../host/services/host.service';
 
 
 
@@ -46,7 +47,8 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     FormsModule,
     ClipboardModule
   ],
-  providers: [ 
+  providers: [
+    HostService,
     AppService,
     {
       provide: MAT_RADIO_DEFAULT_OPTIONS,

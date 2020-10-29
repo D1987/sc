@@ -5,6 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201023094551_UpdateAppModel.cs" />
+    <Compile Remove="Migrations\20201023094551_UpdateAppModel.Designer.cs" />
+    <Compile Remove="Migrations\20201023094824_UpdateAppModel.cs" />
+    <Compile Remove="Migrations\20201023094824_UpdateAppModel.Designer.cs" />
+    <Compile Remove="Migrations\20201023095133_UpdateAppModel.cs" />
+    <Compile Remove="Migrations\20201023095133_UpdateAppModel.Designer.cs" />
+    <Compile Remove="Migrations\20201029112631_UpdateVmConfiguration.cs" />
+    <Compile Remove="Migrations\20201029112631_UpdateVmConfiguration.Designer.cs" />
+    <Compile Remove="Migrations\20201029120629_UpdateApp.cs" />
+    <Compile Remove="Migrations\20201029120629_UpdateApp.Designer.cs" />
+    <Compile Remove="Migrations\20201029123301_UpdateAppModel.cs" />
+    <Compile Remove="Migrations\20201029123301_UpdateAppModel.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />

@@ -11,7 +11,14 @@ namespace Server.Dal.EntityConfigurations
             builder
                 .HasOne(c => c.Vm)
                 .WithMany(m => m.Apps)
-                .HasForeignKey(c => c.VmId);
+                .HasForeignKey(c => c.VmId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder
+                .HasOne(c => c.Host)
+                .WithMany(m => m.Apps)
+                .HasForeignKey(c => c.HostId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

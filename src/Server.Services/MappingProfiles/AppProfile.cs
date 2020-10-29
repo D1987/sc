@@ -19,7 +19,9 @@ namespace Server.Services.MappingProfiles
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
                 .ForMember(dest => dest.Critical, opt => opt.MapFrom(src => src.Critical))
                 .ForMember(dest => dest.Enabled, opt => opt.MapFrom(src => src.Enabled))
+                .ForMember(dest => dest.HostId, opt => opt.MapFrom(src => src.Host.Id))
                 .ForMember(dest => dest.VmId, opt => opt.MapFrom(src => src.Vm.Id))
+                .ForMember(dest => dest.Host, opt => opt.Ignore())
                 .ForMember(dest => dest.Vm, opt => opt.Ignore());
         }
     }
