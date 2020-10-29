@@ -2,14 +2,10 @@
 
 namespace Server.Dal.Migrations
 {
-    public partial class UpdateAppModelAddVMNullable : Migration
+    public partial class UpdateAppModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Apps_VMs_VmId",
-                table: "Apps");
-
             migrationBuilder.AlterColumn<int>(
                 name: "VmId",
                 table: "Apps",
@@ -17,19 +13,37 @@ namespace Server.Dal.Migrations
                 oldClrType: typeof(int),
                 oldType: "integer");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Apps_VMs_VmId",
+            migrationBuilder.AddColumn<int>(
+                name: "HostId",
                 table: "Apps",
-                column: "VmId",
-                principalTable: "VMs",
+                nullable: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Apps_HostId",
+                table: "Apps",
+                column: "HostId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Apps_Hosts_HostId",
+                table: "Apps",
+                column: "HostId",
+                principalTable: "Hosts",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Apps_VMs_VmId",
+                name: "FK_Apps_Hosts_HostId",
+                table: "Apps");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Apps_HostId",
+                table: "Apps");
+
+            migrationBuilder.DropColumn(
+                name: "HostId",
                 table: "Apps");
 
             migrationBuilder.AlterColumn<int>(
@@ -39,14 +53,6 @@ namespace Server.Dal.Migrations
                 nullable: false,
                 oldClrType: typeof(int),
                 oldNullable: true);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Apps_VMs_VmId",
-                table: "Apps",
-                column: "VmId",
-                principalTable: "VMs",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
     }
 }

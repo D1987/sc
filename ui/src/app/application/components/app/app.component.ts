@@ -69,8 +69,6 @@ export class AppComponent implements OnInit {
             this.appForm.get('vm.id').setValue(data.vm?.id);
 
             if (this.appForm != null) this.added = false; this.loaded = true;
-
-            console.log(this.appForm.get('host.id').value);
         });
       } else {
         // tslint:disable-next-line:align

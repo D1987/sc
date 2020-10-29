@@ -1,7 +1,7 @@
 <form [formGroup]="appForm" novalidate >
     <div formGroupName="host">
         <mat-form-field appearance="outline">
-            <mat-label>Host</mat-label>
+            <mat-label>Host. Choose a host if no virtual machine</mat-label>
             <mat-select formControlName="id">
                 <mat-option>None</mat-option>     
                 <mat-option *ngFor="let host of hosts" [value]="host.id">{{host.name}}</mat-option>        

@@ -7,7 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import { App } from 'src/app/models/generated/app';
 
 @Component({
   selector: 'app-host-detail',
@@ -16,53 +16,101 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class HostDetailComponent implements OnInit {
 
-    @ViewChild(MatSort, {static: false}) sort: MatSort;
-    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild('paginatorVm') paginatorVm: MatPaginator;
+    @ViewChild('paginatorApp') paginatorApp: MatPaginator;    
+    @ViewChild(MatSort, {static: true}) sort: MatSort;
+
     searchField;
     id: number;
     host: Host;
     loaded: boolean = false;
-    dataSource: MatTableDataSource<Host>;    
-    displayedColumns: string[] = ['name'];
+    dataSourceVm: MatTableDataSource<Host>;
+    dataSourceApp: MatTableDataSource<App>;   
+    displayedVmColumns: string[] = ['name'];
+    displayedAppColumns: string[] = ['name','project'];
     hide: boolean = false;
- 
+    shownVm: boolean = true;
+    shownApp: boolean = true;
+
     constructor(
       private hostService: HostService,
       activeRoute: ActivatedRoute,
       private matIconRegistry: MatIconRegistry,
       private domSanitizer: DomSanitizer) {
-      this.id = Number.parseInt(activeRoute.snapshot.params["id"]);
-      this.matIconRegistry.addSvgIcon(
-        "copy",
-        this.domSanitizer.bypassSecurityTrustResourceUrl('assets/copy-content.svg'));
+        this.id = Number.parseInt(activeRoute.snapshot.params["id"]);
+        this.matIconRegistry.addSvgIcon(
+          "copy",
+          this.domSanitizer.bypassSecurityTrustResourceUrl('assets/copy-content.svg'));          
     }
  
     ngOnInit() {
       if (this.id)
         this.hostService.getById(this.id)
             .subscribe((data: Host) => {
-            this.host = data;            
+            this.host = data;
             this.loaded = true;
-            this.dataSource = new MatTableDataSource<any>(data.vms);
-            this.dataSource.sort = this.sort;
-            this.dataSource.paginator = this.paginator;
+
+            if (this.host.vms.length === 0) {
+              this.shownVm = false
+            }
+
+            if (this.host.apps.length === 0) {
+              this.shownApp = false
+            }
+
+            this.dataSourceVm = new MatTableDataSource<any>(data.vms);
+            this.dataSourceVm.sort = this.sort;
+            !this.dataSourceVm.paginator ? this.dataSourceVm.paginator = this.paginatorVm : null;
+        
+            this.dataSourceApp = new MatTableDataSource<any>(data.apps);
+            this.dataSourceApp.sort = this.sort;
+            !this.dataSourceApp.paginator ? this.dataSourceApp.paginator = this.paginatorApp : null;
+           
         });
+    } 
+
+    applyFilterVm(event: Event) {
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.dataSourceVm.filter = filterValue.trim().toLowerCase();
+      
+      if (this.dataSourceVm.paginator) {
+        this.dataSourceVm.paginator.firstPage();
+      }
     }
 
-    applyFilter(event: Event) {
+    applyFilterApp(event: Event) {
       const filterValue = (event.target as HTMLInputElement).value;
-      this.dataSource.filter = filterValue.trim().toLowerCase();
-  
-      if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
+      this.dataSourceApp.filter = filterValue.trim().toLowerCase();
+
+      if (this.dataSourceApp.paginator) {
+        this.dataSourceApp.paginator.firstPage();
       }
+    }
+
+    clearFiltersVm() {    
+      this.searchField = '';
+      this.searchField = null;
+      this.dataSourceVm.filter = '';
+      this.dataSourceVm.filter = null;
+    }
+
+    clearFiltersApp() {    
+      this.searchField = '';
+      this.searchField = null;
+      this.dataSourceApp.filter = '';
+      this.dataSourceApp.filter = null;
     }
 
     clearFilters() {    
       this.searchField = '';
       this.searchField = null;
-      this.dataSource.filter = '';
-      this.dataSource.filter = null;
+      
+      this.dataSourceVm.filter = '';
+      this.dataSourceVm.filter = null;
+    
+      this.dataSourceApp.filter = '';
+      this.dataSourceApp.filter = null;
+      
     }
 
     hidePassword() {

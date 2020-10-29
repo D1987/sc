@@ -17,14 +17,13 @@ export class VMDetailComponent implements OnInit {
 
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  searchField;
   id: number;
   vm: VM;
   loaded: boolean = false;
   dataSource: MatTableDataSource<VM>;
   displayedColumns: string[] = ['name', 'project'];
-  hide: boolean = false;
-  searchField;
+  hide: boolean = false;  
 
   constructor(
     private VMService: VMService,

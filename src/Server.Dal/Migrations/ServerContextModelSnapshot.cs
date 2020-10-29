@@ -408,7 +408,8 @@ namespace Server.Dal.Migrations
 
                     b.HasOne("Server.Entities.Models.VM", "Vm")
                         .WithMany("Apps")
-                        .HasForeignKey("VmId");
+                        .HasForeignKey("VmId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Server.Entities.Models.VM", b =>

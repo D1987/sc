@@ -10,8 +10,8 @@ using Server.Dal;
 namespace Server.Dal.Migrations
 {
     [DbContext(typeof(ServerContext))]
-    [Migration("20201023145554_UpdateAppModelAddVMNullable")]
-    partial class UpdateAppModelAddVMNullable
+    [Migration("20201029123846_UpdateAppModel")]
+    partial class UpdateAppModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -405,11 +405,13 @@ namespace Server.Dal.Migrations
                 {
                     b.HasOne("Server.Entities.Models.Host", "Host")
                         .WithMany("Apps")
-                        .HasForeignKey("HostId");
+                        .HasForeignKey("HostId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Server.Entities.Models.VM", "Vm")
                         .WithMany("Apps")
-                        .HasForeignKey("VmId");
+                        .HasForeignKey("VmId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Server.Entities.Models.VM", b =>

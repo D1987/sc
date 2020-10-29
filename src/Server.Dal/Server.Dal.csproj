@@ -11,6 +11,12 @@
     <Compile Remove="Migrations\20201023094824_UpdateAppModel.Designer.cs" />
     <Compile Remove="Migrations\20201023095133_UpdateAppModel.cs" />
     <Compile Remove="Migrations\20201023095133_UpdateAppModel.Designer.cs" />
+    <Compile Remove="Migrations\20201029112631_UpdateVmConfiguration.cs" />
+    <Compile Remove="Migrations\20201029112631_UpdateVmConfiguration.Designer.cs" />
+    <Compile Remove="Migrations\20201029120629_UpdateApp.cs" />
+    <Compile Remove="Migrations\20201029120629_UpdateApp.Designer.cs" />
+    <Compile Remove="Migrations\20201029123301_UpdateAppModel.cs" />
+    <Compile Remove="Migrations\20201029123301_UpdateAppModel.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
