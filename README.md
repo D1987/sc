@@ -1,4 +1,6 @@
 TO DO
+# button up in tables
+# hower on tables row
 # hash passwords
 # error message for mat-select
 # edit detect changes in form
