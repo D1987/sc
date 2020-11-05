@@ -6,8 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { DialogComponent } from 'src/app/dialogs/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-
-// const ipInt = require('ip-to-int');
+import { HostListener } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-vm-list',
@@ -21,8 +21,10 @@ export class VMListComponent implements OnInit {
   searchField;
   displayedColumns: string[] = ['name', 'ip', 'critical', 'on', 'actions'];
   dataSource: MatTableDataSource<VM>;
-  
-  constructor(private vmService: VMService, private dialog: MatDialog) { }
+
+  constructor(
+    private vmService: VMService,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
       this.load();
@@ -85,5 +87,4 @@ export class VMListComponent implements OnInit {
     this.dataSource.filter = '';
     this.dataSource.filter = null;
   }
-
 }

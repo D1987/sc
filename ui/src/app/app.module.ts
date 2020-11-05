@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { appRouterProviders } from './app-routing.module';
 import { DialogComponent } from './dialogs/dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+
   
 @NgModule({
     imports: [ 
@@ -36,7 +37,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     declarations: [ 
         AppComponent,        
         SidenavComponent,
-        DialogComponent,
+        DialogComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

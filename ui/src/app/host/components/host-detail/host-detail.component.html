@@ -45,7 +45,7 @@
                         </mat-cell>
                     </ng-container>
                     <mat-header-row *matHeaderRowDef="displayedVmColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedVmColumns;"></mat-row>
+                    <mat-row *matRowDef="let row; columns: displayedVmColumns;" class="example-element-row"></mat-row>
                 </mat-table>
                 <mat-paginator #paginatorVm [pageSize]="100" [pageSizeOptions]="[10,50,100,200]"></mat-paginator>
             </mat-card-content>
@@ -79,7 +79,7 @@
                         <mat-cell *matCellDef="let app">{{app?.project}}</mat-cell>
                     </ng-container>
                     <mat-header-row *matHeaderRowDef="displayedAppColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedAppColumns;"></mat-row>
+                    <mat-row *matRowDef="let row; columns: displayedAppColumns;" class="example-element-row"></mat-row>
                 </mat-table>
                 <mat-paginator #paginatorApp [pageSize]="100" [pageSizeOptions]="[10,50,100,200]"></mat-paginator>
             </mat-card-content>

@@ -28,7 +28,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     VMFormComponent,
     VMDetailComponent,
     VMListComponent,
-    VMComponent,
+    VMComponent
   ],
   imports: [
     CommonModule,

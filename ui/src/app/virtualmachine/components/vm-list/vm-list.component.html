@@ -1,4 +1,4 @@
-<div class="mat-cell">
+<div class="mat-cell">  
   <h2>VIRTUAL MACHINES</h2>  
   <mat-card>
     <mat-card-content>
@@ -56,10 +56,9 @@
           </mat-cell>
         </ng-container>  
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-      </mat-table> 
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></mat-row>
+      </mat-table>
       <mat-paginator [pageSize]="100" [pageSizeOptions]="[10,50,100,200]"></mat-paginator>
     </mat-card-content>
   </mat-card>
 </div>
-  
