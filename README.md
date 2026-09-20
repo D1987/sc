@@ -57,7 +57,8 @@ Configure the database connection and JWT secret in `src/Server.Application/apps
 
 CI/CD is wired up via `.gitlab-ci.yml` for GitLab pipelines.
 
-TO DO
+## TO DO
+
 # edit detect changes in form
 # services
 # table lazy loading
