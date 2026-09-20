@@ -59,19 +59,19 @@ CI/CD is wired up via `.gitlab-ci.yml` for GitLab pipelines.
 
 ## TO DO
 
-# edit detect changes in form
-# services
-# table lazy loading
-# button up in tables
-# ngxs
-# hash passwords
-# error message for mat-select
-# not update if wasnt changes
-# fix appear login form
-# check create/edit one path
-# dark view
-# load not all data from method get all
-# to do common components
-# to do common c# projects' names
-# one import angular
-# if host autofill ip... for application
+1. edit detect changes in form
+2. services
+3. table lazy loading
+4. button up in tables
+5. ngxs
+6. hash passwords
+7. error message for mat-select
+8. not update if wasnt changes
+9. fix appear login form
+10. check create/edit one path
+11. dark view
+12. load not all data from method get all
+13. to do common components
+14. to do common c# projects' names
+15. one import angular
+16. if host autofill ip... for application
